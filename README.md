@@ -25,22 +25,27 @@
 - **Postman** or any API testing tool
 
 ## 🔗 API Endpoints
-🔹 Authentication (/api/v1/auth)
-POST /register – User registration
-POST /login – User login
-GET /profile – Get user profile
-🔹 Jobs (/api/v1/jobs)
-POST /jobs – Create job (Employer only)
-GET /jobs – Get all jobs
-GET /jobs/:id – Get job by ID
-PUT /jobs/:id – Update job (Employer/Admin only)
-DELETE /jobs/:id – Soft delete job
-🔹 Applications (/api/v1/applications)
-POST /jobs/:id/apply – Apply for a job
-GET /jobs/:id/applications – View applicants (Employer/Admin)
-DELETE /applications/:id – Withdraw application
-📜 License
+
+### 🔹 Authentication (/api/v1/auth)
+- **POST** /register – User registration
+- **POST** /login – User login
+- **GET** /profile – Get user profile
+
+### 🔹 Jobs (/api/v1/jobs)
+- **POST** /jobs – Create job (Employer only)
+- **GET** /jobs – Get all jobs
+- **GET** /jobs/:id – Get job by ID
+- **PUT** /jobs/:id – Update job (Employer/Admin only)
+- **DELETE** /jobs/:id – Soft delete job
+
+### 🔹 Applications (/api/v1/applications)
+- **POST** /jobs/:id/apply – Apply for a job
+- **GET** /jobs/:id/applications – View applicants (Employer/Admin)
+- **DELETE** /applications/:id – Withdraw application
+
+## 📜 License
 This project is licensed under the MIT License.
+
 
 ## 🚀 Installation & Setup
 ```sh
