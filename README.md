@@ -22,7 +22,25 @@
 - **MongoDB** (local or MongoDB Atlas)  
 - **Redis** for caching  
 - **Environment Variables** for JWT, MongoDB, Redis, etc.  
-- **Postman** or any API testing tool  
+- **Postman** or any API testing tool
+
+## 🔗 API Endpoints
+🔹 Authentication (/api/v1/auth)
+POST /register – User registration
+POST /login – User login
+GET /profile – Get user profile
+🔹 Jobs (/api/v1/jobs)
+POST /jobs – Create job (Employer only)
+GET /jobs – Get all jobs
+GET /jobs/:id – Get job by ID
+PUT /jobs/:id – Update job (Employer/Admin only)
+DELETE /jobs/:id – Soft delete job
+🔹 Applications (/api/v1/applications)
+POST /jobs/:id/apply – Apply for a job
+GET /jobs/:id/applications – View applicants (Employer/Admin)
+DELETE /applications/:id – Withdraw application
+📜 License
+This project is licensed under the MIT License.
 
 ## 🚀 Installation & Setup
 ```sh
@@ -40,20 +58,5 @@ npm run dev
 
 # Start the server (production mode)
 npm start
-🔗 API Endpoints
-🔹 Authentication (/api/v1/auth)
-POST /register – User registration
-POST /login – User login
-GET /profile – Get user profile
-🔹 Jobs (/api/v1/jobs)
-POST /jobs – Create job (Employer only)
-GET /jobs – Get all jobs
-GET /jobs/:id – Get job by ID
-PUT /jobs/:id – Update job (Employer/Admin only)
-DELETE /jobs/:id – Soft delete job
-🔹 Applications (/api/v1/applications)
-POST /jobs/:id/apply – Apply for a job
-GET /jobs/:id/applications – View applicants (Employer/Admin)
-DELETE /applications/:id – Withdraw application
-📜 License
-This project is licensed under the MIT License.
+
+
