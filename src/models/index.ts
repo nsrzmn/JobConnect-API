@@ -1,7 +1,5 @@
-import { dummy } from ".";
+import { Dummy } from "./dummy";
 
-type ModelType = any;
-
-export * from "./dummy";
-
-export const models: ModelType = [dummy];
+export const models = {
+  Dummy,
+};

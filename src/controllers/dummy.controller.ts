@@ -19,8 +19,8 @@ export class DummyController {
     try {
       const { body } = req;
       let message = "dummy function executed.";
-      const data = await dummyFunctionSchema.validateAsync(body);
-      const response: any = await this.__service.dummyFunction(data);
+      // const data = await dummyFunctionSchema.validateAsync(body);
+      const response: any = await this.__service.dummyFunction(body);
 
       res.status(200).json({
         statusCode: 200,
