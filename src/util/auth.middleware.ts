@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const excludeUrls = [ "/register"];
+const excludeUrls = [ "/register", "/login" ];
 
 export const authentificationMiddleware = async (
   req: Request,
@@ -26,11 +26,8 @@ export const authentificationMiddleware = async (
       return res.status(401).json({ message: "Set JWT Secrect First" });
     }
     
-    // const decoded = jwt.verify(token, process.env.JWT_SECRET) ;
-    const decoded = jwt.decode(token) ;
-    // console.log( "decoded: ",decoded );
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) ;
     req.body.user = decoded;
-    console.log( "req.body.user: ",req.body.user );
 
     next();
   } catch (error) {

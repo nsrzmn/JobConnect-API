@@ -34,7 +34,7 @@ const userSchema = new Schema<UserI>(
 );
 
 // Define a virtual field for `labelName`
-userSchema.virtual("labelName").get(function () {
+userSchema.virtual("roleName").get(function () {
   if (this.role === 1) return "Admin";
   if (this.role === 2) return "Emoloyer";
   if (this.role === 2) return "User";

@@ -26,19 +26,7 @@ export class UsersService {
     });
     await newUser.save();
     // Return JWT token
-    if (!process.env.JWT_SECRET) {
-      throw new Error("Set JWT Secrect First");
-    }
-    const token = jwt.sign(
-      {
-        id: newUser._id,
-        email: newUser.email,
-      },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
+    const token = await this.tokenGenerate(newUser._id as string, newUser.email as string);
 
     return token;
   };
@@ -64,8 +52,44 @@ export class UsersService {
         throw new Error("Invalid password");
     }
 
-    console.log("user", user);
+    const token = this.tokenGenerate(user._id as string, user.email as string);
+    return token;
+};
+
+ public getUserProfile = async (data: any): Promise<any> => {
+    // Get user profile
+    const { email } = data;
+    // Check if the user exists
+    const userExists = await User.findOne({
+        email,
+    }).select('firstName lastName role');
+    // If the user does not exist, return an error
+    if (!userExists) {
+        throw new Error("User not found");
+    }
+    // If the user exists, return the user profile
+    return userExists;
+};
+
+
+
+ tokenGenerate(_id: string, email: string) {
+    if (!process.env.JWT_SECRET) {
+        throw new Error("Set JWT Secrect First");
+    }
+    const token = jwt.sign(
+        {
+            id: _id,
+            email: email,
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "1d",
+        }
+    );
+
+    return token;
     
-    return user;
-}
+}   
+
 }
