@@ -1,4 +1,4 @@
-import { dummyService } from "@src/services";
-import { DummyController } from "./dummy.controller";
+import {  userService } from "@src/services";
+import {  UsersController } from "./user.controller";
 
-export const dummyController: DummyController = new DummyController(dummyService);
+export const usersController: UsersController = new UsersController(userService);

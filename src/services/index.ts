@@ -1,7 +1,7 @@
-import { DummyService } from "./dummy.service";
+import { UsersService } from "./users.service";
 
-const dummyService: DummyService = new DummyService()
+const userService: UsersService = new UsersService()
 
 export {
-    dummyService
+    userService
 }
