@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import * as http from "http";
 import { connectDB } from "./config/database"; // Import MongoDB connection
 import { routes } from "./routes/routes";
+import { authentificationMiddleware } from "./util/auth.middleware";
 
 dotenv.config({ path: ".env" });
 
@@ -17,7 +18,7 @@ app.set("host", process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
 app.set("port", process.env.PORT || 8081);
 app.set("env", process.env.NODE_ENVR || "development");
 
-app.use("/api", routes);
+app.use("/api", authentificationMiddleware ,routes);
 
 export const server: http.Server = http.createServer(app);
 

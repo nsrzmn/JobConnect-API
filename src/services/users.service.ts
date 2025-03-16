@@ -26,12 +26,15 @@ export class UsersService {
     });
     await newUser.save();
     // Return JWT token
+    if (!process.env.JWT_SECRET) {
+      throw new Error("Set JWT Secrect First");
+    }
     const token = jwt.sign(
       {
         id: newUser._id,
         email: newUser.email,
       },
-      process.env.JWT_SECRET || "defaultSecret",
+      process.env.JWT_SECRET,
       {
         expiresIn: "1d",
       }
@@ -39,4 +42,30 @@ export class UsersService {
 
     return token;
   };
+
+  public login = async (data: any): Promise<any> => {
+    // Login user
+    const { email, password } = data;
+    // Check if the user exists
+    const user = await User.findOne({
+        email,  
+    });
+    // If the user does not exist, return an error
+    if (!user) {
+        throw new Error("User not found");
+        }
+    // If the user exists, check the password
+    if (!user.password) {
+        throw new Error("User password is undefined");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    // If the password is invalid, return an error
+    if (!isPasswordValid) {
+        throw new Error("Invalid password");
+    }
+
+    console.log("user", user);
+    
+    return user;
+}
 }

@@ -34,4 +34,23 @@ export class UsersController {
       });
     }
   };
+
+  public login = async (req: Request, res: Response) => {
+    try {
+      let message = "user login function executed.";
+      // const data = await usersFunctionSchema.validateAsync(body);
+      const response: any = await this.__service.login(req.body.user);
+
+      res.status(200).json({
+        statusCode: 200,
+        message,
+        response,
+      });
+    } catch (error: any) {
+      res.status(403).send({
+        statusCode: 403,
+        message: error.message,
+      });
+    }
+  };
 }

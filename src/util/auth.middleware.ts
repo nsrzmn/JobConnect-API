@@ -1,23 +1,36 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+const excludeUrls = [ "/register"];
+
 export const authentificationMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const token = req.header("Authorization")?.replace("Bearer","");
+    console.log( req.url );
+    
+    if (excludeUrls.includes(req.url)) {
+      return next();
+    }
+
+    const token = req.header("Authorization")?.replace("Bearer ", "").trim();
+    console.log( "token: ",token );
+    
     if (!token || token === "") {
       return res.status(401).json({ message: "No token provided!" });
     }
 
     if( !process.env.JWT_SECRET ){
-      return res.status(401).json({ message: "The token is invalid or expired" });
+      return res.status(401).json({ message: "Set JWT Secrect First" });
     }
     
-    const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string, email: string };
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET) ;
+    const decoded = jwt.decode(token) ;
+    // console.log( "decoded: ",decoded );
     req.body.user = decoded;
+    console.log( "req.body.user: ",req.body.user );
 
     next();
   } catch (error) {
